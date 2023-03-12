@@ -8,7 +8,7 @@ public class PlayerCamera : MonoBehaviour
 
     public Transform cameraPivot;
     public Camera cameraObject;
-    public GameObject Player;
+    public GameObject player;
 
     Vector3 cameraFollowVelocity = Vector3.zero;
     Vector3 targetPosition;
@@ -16,18 +16,13 @@ public class PlayerCamera : MonoBehaviour
     Quaternion targetRotation;
 
     [Header("Camera Speeds")]
-    float cameraSmoothTime = 0.2f;
+    public float cameraSmoothTime = 0.2f;
 
     float lookAmountVertical;
     float lookAmountHorizontal;
     float maximumPivotAngle = 15;
     float minimumPivotAngle = -15;
 
-    private void Awake()
-    {
-        Player.GetComponent<InputManager>();
-    }
-    
     public void HandleAllCameraMovement()
     {
         FollowPlayer();
@@ -36,14 +31,14 @@ public class PlayerCamera : MonoBehaviour
 
     private void FollowPlayer()
     {
-        targetPosition = Vector3.SmoothDamp(transform.position, Player.transform.position, ref cameraFollowVelocity, cameraSmoothTime * Time.deltaTime);
+        targetPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraFollowVelocity, cameraSmoothTime * Time.deltaTime);
         transform.position = targetPosition;
     }
 
     private void RotateCamera()
     {
         lookAmountVertical = lookAmountVertical + (inputManager.horizontalCameraInput);
-        lookAmountHorizontal = lookAmountHorizontal + (inputManager.verticalCameraInput * -1);
+        lookAmountHorizontal = lookAmountHorizontal - (inputManager.verticalCameraInput);
         lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minimumPivotAngle, maximumPivotAngle);
 
         cameraRotation = Vector3.zero;
@@ -52,11 +47,19 @@ public class PlayerCamera : MonoBehaviour
         targetRotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraSmoothTime);
         transform.rotation = targetRotation;
 
+        if (inputManager.quickTurnInput)
+        {
+            inputManager.quickTurnInput = false;
+            lookAmountVertical = lookAmountVertical + 180;
+            cameraRotation.y = cameraRotation.y + 180;
+            transform.rotation = targetRotation;
+            //IN FUTURE, ADD SMOOTH TRANSITION
+        }
+
         cameraRotation = Vector3.zero;
         cameraRotation.x = lookAmountHorizontal;
         targetRotation = Quaternion.Euler(cameraRotation);
         targetRotation = Quaternion.Slerp(cameraPivot.localRotation, targetRotation, cameraSmoothTime);
         cameraPivot.localRotation = targetRotation;
-
     }
 }

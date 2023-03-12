@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerLocomotionManager : MonoBehaviour
 {
     InputManager inputManager;
-    
+    PlayerManager playerManager;
+
+    public Rigidbody playerRigidBody;
+
     [Header("Camera Transform")]
     public Transform playerCamera;
 
     [Header("Movement Speed")]
     public float rotationSpeed = 3.5f;
+    public float quickTurnSpeed = 8;
 
     [Header("Rotation Varaibles")]
     Quaternion targetRotation; //The place we want to rotate
@@ -18,7 +22,9 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void Awake()
     {
+        playerRigidBody = GetComponent<Rigidbody>();
         inputManager = GetComponent<InputManager>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     public void HandleAllLocomotion()
@@ -34,6 +40,12 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
         {
+            transform.rotation = playerRotation;
+        }
+
+        if (playerManager.isPreformingQuickTurn)
+        {
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
             transform.rotation = playerRotation;
         }
     }
