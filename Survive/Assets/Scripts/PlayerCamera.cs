@@ -43,7 +43,7 @@ public class PlayerCamera : MonoBehaviour
     private void RotateCamera()
     {
         lookAmountVertical = lookAmountVertical + (inputManager.horizontalCameraInput);
-        lookAmountHorizontal = lookAmountHorizontal + (inputManager.verticalCameraInput);
+        lookAmountHorizontal = lookAmountHorizontal + (inputManager.verticalCameraInput * -1);
         lookAmountHorizontal = Mathf.Clamp(lookAmountHorizontal, minimumPivotAngle, maximumPivotAngle);
 
         cameraRotation = Vector3.zero;
