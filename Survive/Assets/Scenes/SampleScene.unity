@@ -379,6 +379,12 @@ GameObject:
   - component: {fileID: 295864192}
   - component: {fileID: 295864194}
   - component: {fileID: 295864191}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+  - component: {fileID: 295864194}
+  - component: {fileID: 295864193}
+  - component: {fileID: 295864192}
 >>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Player Camera
@@ -480,6 +486,51 @@ MonoBehaviour:
   serverOnly: 0
   visible: 0
   hasSpawned: 0
+<<<<<<< Updated upstream
+=======
+--- !u!114 &295864192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295864188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &295864193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295864188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  autoStartServerBuild: 1
+  autoConnectClientBuild: 0
+  sendRate: 30
+  offlineScene: 
+  onlineScene: 
+  transport: {fileID: 295864194}
+  networkAddress: localhost
+  maxConnections: 100
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 0}
+  autoCreatePlayer: 0
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  timeInterpolationGui: 0
+>>>>>>> Stashed changes
 --- !u!114 &295864194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +558,9 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1001 &323835808
 PrefabInstance:
